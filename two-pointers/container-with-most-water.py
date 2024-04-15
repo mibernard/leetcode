@@ -1,18 +1,16 @@
 class Solution:
     def maxArea(self, height: List[int]) -> int:
-        dist, maxA = 0, 0
+        maxA = 0
         left, right = 0, len(height) - 1
         
         while right > left: 
             dist = right - left
-            currA = dist * min(height[left], height[right])
-            if currA > maxA:
-                maxA = currA
+            maxA = max(maxA, dist * min(height[left], height[right]))        
+            
+            if height[left] > height[right]:
+                right -= 1
             else:
-                if height[left] > height[right]:
-                    right -= 1
-                else:
-                    left += 1
+                left += 1
         return maxA
 
 #Time: O(n)
